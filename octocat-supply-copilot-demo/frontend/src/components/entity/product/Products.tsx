@@ -24,15 +24,23 @@ const fetchProducts = async (): Promise<Product[]> => {
 export default function Products() {
   const [quantities, setQuantities] = useState<Record<number, number>>({});
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState<'none' | 'asc' | 'desc'>('none');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showModal, setShowModal] = useState(false);
   const { data: products, isLoading, error } = useQuery('products', fetchProducts);
   const { darkMode } = useTheme();
 
-  const filteredProducts = products?.filter(product => 
-    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = products
+    ?.filter(product =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice()
+    .sort((a, b) => {
+      if (sortOrder === 'asc') return a.price - b.price;
+      if (sortOrder === 'desc') return b.price - a.price;
+      return 0;
+    });
 
   const handleQuantityChange = (productId: number, change: number) => {
     setQuantities(prev => ({
@@ -106,6 +114,30 @@ export default function Products() {
             >
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Sort by price:</span>
+            {(['none', 'asc', 'desc'] as const).map((order) => {
+              const labels = { none: 'Default', asc: 'Low → High', desc: 'High → Low' };
+              const isActive = sortOrder === order;
+              return (
+                <button
+                  key={order}
+                  onClick={() => setSortOrder(order)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors duration-200 ${
+                    isActive
+                      ? 'bg-primary text-white border-primary'
+                      : darkMode
+                      ? 'bg-gray-800 text-gray-300 border-gray-700 hover:border-primary hover:text-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:border-primary hover:text-primary'
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {labels[order]}
+                </button>
+              );
+            })}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
