@@ -1,114 +1,104 @@
-# 🚀 GitHub Copilot Agent Demo - Supply Chain App
+# 🚀 OctoCAT Supply: The Ultimate GitHub Copilot Demo
 
-This repository demonstrates how to use GitHub Copilot Agent Mode to understand, modify, and improve a real full-stack application.
+![OctoCAT Supply](./frontend/public/hero.png)
 
-The project is based on a supply chain management system and is used to showcase modern AI-assisted development workflows.
+Welcome to the OctoCAT Supply Website - your go-to demo for showcasing the incredible capabilities of GitHub Copilot, GHAS, and the power of AI-assisted development!
 
----
+## ✨ What Makes This Demo Special
 
-## 🧠 What This Demo Shows
+This isn't just another demo app - it's a carefully crafted showcase that demonstrates the full spectrum of GitHub's AI capabilities:
 
-This demo focuses on turning GitHub Copilot from a coding assistant into an autonomous development agent.
+- 🤖 **Copilot Agent Mode & Vision** - Watch Copilot understand UI designs and implement complex features across multiple files
+- 🎭 **MCP Server Integration** - Demonstrate extended capabilities with Playwright for testing and GitHub API integration
+- 🛡️ **Security First** - Showcase GHAS scanning and Copilot-powered vulnerability fixes
+- 🧪 **Test Generation** - Exhibit Copilot's ability to analyze coverage and generate meaningful tests
+- 🔄 **CI/CD & IaC** - Generate deployment workflows and infrastructure code with natural language
+- 🎯 **Custom Instructions** - Show how Copilot can be tailored to understand internal frameworks and standards
 
-Key capabilities demonstrated:
+## 🏗️ Architecture
 
-- Understanding an existing codebase  
-- Planning feature implementation (Plan Mode)  
-- Making multi-file changes (Frontend + Backend)  
-- Running the application and fixing errors automatically  
-- Generating and improving tests  
-- Performing code reviews and explaining changes  
-- Applying secure development practices  
-- Demonstrating agent governance and control  
+The application is built using modern TypeScript with a clean separation of concerns:
 
----
+```mermaid
+erDiagram
+    Headquarters ||--o{ Branch: has
+    Branch ||--o{ Order: placed_at
+    Order ||--o{ OrderDetail: contains
+    OrderDetail ||--o{ OrderDetailDelivery: fulfilled_by
+    OrderDetail }|--|| Product: references
+    Delivery ||--o{ OrderDetailDelivery: includes
+    Supplier ||--o{ Delivery: provides
+```
 
-## 🏗️ Architecture Overview
+### Tech Stack
+- **Frontend**: React 18+, TypeScript, Tailwind CSS, Vite
+- **Backend**: Express.js, TypeScript, OpenAPI/Swagger
+- **DevOps**: Docker
 
-This is a full-stack TypeScript application:
+## 🎯 Key Demo Scenarios
 
-### Frontend
-- React + TypeScript  
-- Vite  
-- Tailwind CSS  
-- Located in /frontend  
+1. **Vibe Coding**
+   - Implement a shopping cart from a design mockup
+   - Watch Copilot analyze, plan, and implement across multiple files
+   - Show real-time UI updates and state management
 
-### Backend
-- Express.js + TypeScript  
-- REST API  
-- Swagger documentation  
-- Located in /api  
+2. **Automated Testing**
+   - Generate BDD feature files
+   - Create and execute Playwright tests
+   - Enhance unit test coverage with intelligent test generation
 
-### Communication
-- REST API over HTTP  
-- Frontend communicates with backend via http://localhost:3000  
+3. **Security and Best Practices**
+   - Scan for vulnerabilities using GHAS
+   - Generate automated fixes
+   - Implement security best practices with Copilot guidance
 
----
+4. **DevOps Automation**
+   - Generate GitHub Actions workflows
+   - Create infrastructure as code
+   - Set up container deployments
 
-## ⚙️ Running the Project
+## 🚀 Getting Started
 
-### Prerequisites
-- Node.js (v18+ recommended)
+1. Clone this repository
+2. Build the projects:
+   ```bash
+   # Build API and Frontend
+   npm install && npm run build
+   ```
+3. Start the application:
+   ```bash
+   npm run dev
+   ```
 
-### Install dependencies
-npm install
+Or use the VS Code tasks:
+- `Cmd/Ctrl + Shift + P` -> `Run Task` -> `Build All`
+- Use the Debug panel to run `Start API & Frontend`
 
-### Build the project
-npm run build
+## 🛠️ MCP Server Setup (Optional)
 
-### Run the project
-npm run dev
+To showcase extended capabilities:
 
-### Access the app
-- Frontend: http://localhost:5137  
-- API: http://localhost:3000  
+1. Install Docker/Podman for the GitHub MCP server
+2. Use VS Code command palette:
+   - `MCP: List servers` -> `playwright` -> `Start server`
+   - `MCP: List servers` -> `github` -> `Start server`
+3. Configure with a GitHub PAT (required for GitHub MCP server)
 
----
+## 📚 Documentation
 
-## 🤖 Example Copilot Prompts
+- [Detailed Architecture](./docs/architecture.md)
+- [Complete Demo Script](./docs/demo-script.md)
 
-Use these prompts inside GitHub Copilot Chat (Agent Mode):
+## 🎓 Pro Tips for Solution Engineers
 
-Understand the system:
-Explain this project architecture and how frontend and backend communicate.
-
-Plan a feature:
-Create a plan to add category filtering to products end to end.
-
-Implement and verify:
-Implement the feature, run the app, and fix any issues.
-
-Review changes:
-Summarize the changes and identify risks or improvements.
-
----
-
-## 🔐 Governance & Best Practices
-
-This demo emphasizes that AI does not replace developers - it augments them.
-
-- All changes should be reviewed before merging  
-- Agent permissions should be scoped (least privilege)  
-- Sensitive data must not be exposed  
-- CI/CD validation should remain in place  
-
----
-
-## ⚡ Key Takeaway
-
-GitHub Copilot is no longer just a code completion tool.
-
-It acts as an intelligent agent that can:
-
-- Understand intent  
-- Plan execution  
-- Modify systems  
-- Validate outcomes  
-
-All while keeping humans in control of critical decisions.
+- Practice the demos before customer presentations
+- Remember Copilot is non-deterministic - be ready to adapt
+- Mix and match demo scenarios based on your audience
+- Keep your GitHub PAT handy for MCP demos
 
 ---
 
+*This entire project, including the hero image, was created using AI and GitHub Copilot! Even this README was generated by Copilot using the project documentation.* 🤖✨
 ## 📌 Author
 
 Ofek Ben Eliezer  
